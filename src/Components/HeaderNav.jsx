@@ -1,3 +1,4 @@
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -5,9 +6,29 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "../App.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function HeaderNav() {
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    // Remove the token and all cookies
+    Cookies.remove("token"); // Replace with your cookie key name
+    // You can also use Cookies.remove() to clear other cookies if needed
+
+    // Optionally, clear all cookies
+    // document.cookie.split(";").forEach(function (cookie) {
+    //   document.cookie = cookie.split("=")[0] + "=;expires=" + new Date().toUTCString() + ";path=/";
+    // });
+
+    // Display sign-out success message (or redirect)
+    alert("Sign Out Successful!");
+
+    // Refresh the page after sign-out
+    window.location.reload();  // Force a page reload to reset the state
+  };
+
   return (
     <Navbar expand="lg" className="bg-warning">
       <Container fluid className="gap-lg-5 gap-md-3 gap-sm-1 gap-xs-0">
@@ -37,10 +58,10 @@ function HeaderNav() {
               }
               id="navbarScrollingDropdown"
             >
-              <NavDropdown.Item href="#action3">Your Profile</NavDropdown.Item>
+              <NavDropdown.Item href="/profile">Your Profile</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Your Order</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">Sign Out</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleSignOut}>Sign Out</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#action2">
               <img

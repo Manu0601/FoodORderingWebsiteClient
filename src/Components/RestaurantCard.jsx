@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../App.css";
 
 function RestaurantCard(props) {
-  console.log("RestaurantCard Props:", props);
   return (
     <Link
       className="text-decoration-none text-reset text-center d-flex"
@@ -31,5 +30,4 @@ function RestaurantCard(props) {
     </Link>
   );
 }
-
 export default RestaurantCard;

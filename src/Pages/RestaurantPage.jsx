@@ -3,24 +3,38 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import RestaurantPageItemCard from "../Components/RestaurantPageItemCard.jsx";
 import "../App.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function RestaurantPage() {
   let { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+   
+    const token = Cookies.get("token");
 
+    if (!token) {
+      
+      navigate("/login");
+      return; 
+    }
+
+    
     axios
-      .get(`https://foodorderingwebsiteserver.onrender.com/api/restaurant/id/${id}`)
+      .get(`https://foodorderingwebsiteserver.onrender.com/api/restaurant/id/${id}`, {
+        withCredentials: true, 
+      })
       .then((response) => {
         if (response.data.findRestaurant) {
           setRestaurant(response.data.findRestaurant);
         }
       })
       .catch((error) => {
+        console.error("Error fetching restaurant data:", error);
       });
-  }, [id]);
+  }, [id, navigate]); 
 
   if (!restaurant) return <p>Loading...</p>;
 
@@ -29,15 +43,22 @@ function RestaurantPage() {
       <Container className="my-5 shadow-lg p-3 mb-5 bg-body-tertiary rounded-5">
         <Row>
           <Col sm={6} className="d-flex justify-content-center align-items-center">
-            <img src={restaurant.image} className="restaurant-image rounded-4" alt={restaurant.name} />
+            <img
+              src={restaurant.image}
+              className="restaurant-image rounded-4"
+              alt={restaurant.name}
+            />
           </Col>
           <Col sm={6} className="d-flex flex-column justify-content-center align-items-start">
             <div>
               <p className="fs-2 fw-bold">{restaurant.name}</p>
             </div>
-            <div className="d-flex flex-row flex-nowrap gap-3"> 
-            <p className="fs-5">{restaurant.rating}</p>
-            <img src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1742377549/Food%20Order%20Website/crk2gldxuwtl8rqp5afi.png" className="page-review"/>
+            <div className="d-flex flex-row flex-nowrap gap-3">
+              <p className="fs-5">{restaurant.rating}</p>
+              <img
+                src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1742377549/Food%20Order%20Website/crk2gldxuwtl8rqp5afi.png"
+                className="page-review"
+              />
             </div>
           </Col>
         </Row>
@@ -55,7 +76,7 @@ function RestaurantPage() {
                 image={item.image}
                 desc={item.description}
                 price={item.price}
-                heading={item.name} 
+                heading={item.name}
               />
             ))
           ) : (

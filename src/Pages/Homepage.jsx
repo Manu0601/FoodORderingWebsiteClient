@@ -4,29 +4,39 @@ import BestSellerSlider from "../Components/BestSellerSlider.jsx";
 import RestaurantCard from "../Components/RestaurantCard.jsx";
 import axios from "axios";
 import { Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie"; 
 import "../App.css";
 
 function Homepage() {
   const [productList, setProductList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://foodorderingwebsiteserver.onrender.com/api/restaurant/all"
-        );
-        if (Array.isArray(response.data.restaurant)) {
-          setProductList(response.data.restaurant);
-        } else {
+    const token = Cookies.get("token");
+    
+    if (!token) {
+   
+      navigate("/login");
+    } else {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            "https://foodorderingwebsiteserver.onrender.com/api/restaurant/all"
+          );
+          if (Array.isArray(response.data.restaurant)) {
+            setProductList(response.data.restaurant);
+          } else {
+            setProductList([]);
+          }
+        } catch (error) {
           setProductList([]);
         }
-      } catch (error) {
-        setProductList([]);
-      }
-    };
+      };
 
-    fetchData();
-  }, []);
+      fetchData();
+    }
+  }, [navigate]);
 
   return (
     <>

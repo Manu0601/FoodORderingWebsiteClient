@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "/restaurant/:id",  // ✅ Corrected route path
+        path: "/restaurant/:id", 
         element: <RestaurantPage />,
       },
       {
