@@ -13,20 +13,9 @@ function HeaderNav() {
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-    // Remove the token and all cookies
-    Cookies.remove("token"); // Replace with your cookie key name
-    // You can also use Cookies.remove() to clear other cookies if needed
-
-    // Optionally, clear all cookies
-    // document.cookie.split(";").forEach(function (cookie) {
-    //   document.cookie = cookie.split("=")[0] + "=;expires=" + new Date().toUTCString() + ";path=/";
-    // });
-
-    // Display sign-out success message (or redirect)
+    Cookies.remove("token"); 
     alert("Sign Out Successful!");
-
-    // Refresh the page after sign-out
-    window.location.reload();  // Force a page reload to reset the state
+    window.location.reload();  
   };
 
   return (
@@ -47,8 +36,8 @@ function HeaderNav() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">About Us</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/about">About Us</Nav.Link>
             <NavDropdown
               title={
                 <img

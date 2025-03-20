@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
-import Cookies from "js-cookie";
-import "../App.css";
+import "../../App.css";
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
     fetch("https://foodorderingwebsiteserver.onrender.com/api/user/profile", {
       method: "GET",
       headers: {
@@ -26,7 +15,6 @@ function ProfilePage() {
       .then((response) => response.json())
       .then((data) => setUser(data))
       .catch((error) => console.error("Error fetching user profile:", error));
-  }, [navigate]);
   console.log(user)
   return (
     <>

@@ -1,40 +1,28 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import RestaurantPageItemCard from "../Components/RestaurantPageItemCard.jsx";
-import "../App.css";
+import RestaurantPageItemCard from "../../Components/RestaurantPageItemCard.jsx";
+import "../../App.css";
 import { useParams, useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 function RestaurantPage() {
   let { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-   
-    const token = Cookies.get("token");
-
-    if (!token) {
-      
-      navigate("/login");
-      return; 
-    }
-
-    
-    axios
-      .get(`https://foodorderingwebsiteserver.onrender.com/api/restaurant/id/${id}`, {
-        withCredentials: true, 
-      })
-      .then((response) => {
-        if (response.data.findRestaurant) {
-          setRestaurant(response.data.findRestaurant);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching restaurant data:", error);
-      });
-  }, [id, navigate]); 
+  axios
+    .get(
+      `https://foodorderingwebsiteserver.onrender.com/api/restaurant/id/${id}`,
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      if (response.data.findRestaurant) {
+        setRestaurant(response.data.findRestaurant);
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching restaurant data:", error);
+    });
 
   if (!restaurant) return <p>Loading...</p>;
 
@@ -42,14 +30,20 @@ function RestaurantPage() {
     <Container fluid>
       <Container className="my-5 shadow-lg p-3 mb-5 bg-body-tertiary rounded-5">
         <Row>
-          <Col sm={6} className="d-flex justify-content-center align-items-center">
+          <Col
+            sm={6}
+            className="d-flex justify-content-center align-items-center"
+          >
             <img
               src={restaurant.image}
               className="restaurant-image rounded-4"
               alt={restaurant.name}
             />
           </Col>
-          <Col sm={6} className="d-flex flex-column justify-content-center align-items-start">
+          <Col
+            sm={6}
+            className="d-flex flex-column justify-content-center align-items-start"
+          >
             <div>
               <p className="fs-2 fw-bold">{restaurant.name}</p>
             </div>
@@ -66,7 +60,9 @@ function RestaurantPage() {
 
       <div className="shadow-lg p-3 mb-5 bg-body-tertiary rounded-5">
         <div className="my-5">
-          <p className="fs-1 fw-bold text-center secondHeader">Best In The BYTEEATS</p>
+          <p className="fs-1 fw-bold text-center secondHeader">
+            Best In The BYTEEATS
+          </p>
         </div>
         <Container>
           {restaurant.menu?.length > 0 ? (
