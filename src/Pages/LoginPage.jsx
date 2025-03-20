@@ -14,45 +14,40 @@ function LoginPage() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-  
+
     try {
       const response = await axiosInstance.post("/user/login", formData);
-      console.log("Response Data:", response.data);
-  
-      if (response.data.token) {
-        Cookies.set("token", response.data.token,{ httpOnly: true, secure: true, sameSite: "Strict" }); // ✅ Save token
+      console.log(response.data);
+    
+      if (Cookies.get("token")) {
         setShowSuccess(true);
-  console.log(Cookies)
+    
         setTimeout(() => {
-          navigate("/"); // ✅ Navigate to home page
+          setShowSuccess(false);
+          navigate("/");
         }, 2000);
       } else {
-        setError("Token not received. Please try again.");
         console.error("Token not received");
       }
     } catch (error) {
-      setError(error.response?.data?.message || "Login failed. Please try again.");
       console.error("Login failed:", error.response?.data || error.message);
-    } finally {
-      setLoading(false); // ✅ Always reset loading state
     }
   };
   
   return (
-
-    <Container fluid className="loginBackground">
-      <Row>
-        <Col xs={12} sm={12} md={9} lg={9} className="d-flex justify-content-center align-items-center">
-          <Card className="d-flex text-center border border-0 shadow-lg p-3 mb-5 bg-body-tertiary rounded-3">
+    <Container fluid className="loginBackground min-vh-100 d-flex align-items-center">
+      <Row className="w-100">
+        <Col xs={12} md={6} lg={6} className="d-flex justify-content-center align-items-center order-md-1 order-2">
+          <Card className="text-center border-0 shadow-lg p-3 mb-5 bg-body-tertiary rounded-3 w-100" style={{ maxWidth: '400px' }}>
             <div>
               <p className="fs-4 fw-bold">LOGIN</p>
               {error && <p className="text-danger">{error}</p>}
@@ -73,8 +68,13 @@ function LoginPage() {
             </div>
           </Card>
         </Col>
-        <Col xs={12} sm={12} md={3} lg={3} className="d-flex justify-content-end m-0 p-0">
-          <img src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1740756879/Food%20Order%20Website/eyqxjirzit2trvcv5sv4.png" className="loginImage" alt="Login Illustration" />
+        <Col xs={12} md={6} lg={6} className="d-flex justify-content-center align-items-center order-md-2 order-1">
+          <img 
+            src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1740756879/Food%20Order%20Website/eyqxjirzit2trvcv5sv4.png" 
+            className="img-fluid loginImage" 
+            alt="Login Illustration" 
+            style={{ maxWidth: '100%', height: 'auto' }}
+          />
         </Col>
       </Row>
       <Modal show={showSuccess} onHide={() => setShowSuccess(false)} centered>
