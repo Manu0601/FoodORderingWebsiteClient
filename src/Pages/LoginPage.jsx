@@ -3,45 +3,52 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Form, Modal } from "react-bootstrap";
 import Cookies from "js-cookie";
 import "../App.css";
+import axiosInstance from "../Axios/axiosInstance.js";
 
 function LoginPage() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
+  
     try {
-      const response = await fetch("https://foodorderingwebsiteserver.onrender.com/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
-      const data = await response.json();
-      if (response.ok) {
-        Cookies.set("token", data.token, { expires: 1 });
+      const response = await axiosInstance.post("/user/login", formData);
+      console.log("Response Data:", response.data);
+  
+      if (response.data.token) {
+        Cookies.set("token", response.data.token,{ httpOnly: true, secure: true, sameSite: "Strict" }); // ✅ Save token
         setShowSuccess(true);
+  console.log(Cookies)
         setTimeout(() => {
-          setShowSuccess(false);
-          navigate("/");
+          navigate("/"); // ✅ Navigate to home page
         }, 2000);
       } else {
-        setError(data.message || "Login failed. Please try again.");
+        setError("Token not received. Please try again.");
+        console.error("Token not received");
       }
     } catch (error) {
-      setError("Network error. Please try again later.");
+      setError(error.response?.data?.message || "Login failed. Please try again.");
+      console.error("Login failed:", error.response?.data || error.message);
+    } finally {
+      setLoading(false); // ✅ Always reset loading state
     }
   };
-
+  
   return (
+
     <Container fluid className="loginBackground">
       <Row>
         <Col xs={12} sm={12} md={9} lg={9} className="d-flex justify-content-center align-items-center">
@@ -72,7 +79,7 @@ function LoginPage() {
       </Row>
       <Modal show={showSuccess} onHide={() => setShowSuccess(false)} centered>
         <Modal.Body className="text-center">
-          <p className="fs-5 fw-bold text-warning">Logged in successfully!</p>
+          <p className="fs-5 fw-bold text-warning">Logged in successfully ! 🥳</p>
         </Modal.Body>
       </Modal>
     </Container>

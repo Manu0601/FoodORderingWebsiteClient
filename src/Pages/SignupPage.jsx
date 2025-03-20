@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col, Card, Button, Form, Modal } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Form, Modal, Spinner } from "react-bootstrap";
 import "../App.css";
+import axiosInstance from "../Axios/axiosInstance";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    password: ""
+    password: "",
+    role: "user",
   });
   const [error, setError] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,26 +24,24 @@ function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
+
     try {
-      const response = await fetch("https://foodorderingwebsiteserver.onrender.com/api/admin/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
-      const data = await response.json();
-      if (response.ok) {
+      const response = await axiosInstance.post("/user/signup", formData);
+      
+      if (response.status === 201 || response.status === 200) {
         setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);
           navigate("/login");
         }, 2000);
       } else {
-        setError(data.message || "Signup failed. Please try again.");
+        setError(response.data.message || "Signup failed. Please try again.");
       }
     } catch (error) {
-      setError("Network error. Please try again later.");
+      setError(error.response?.data?.message || "Network error. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,25 +55,59 @@ function SignUpPage() {
               {error && <p className="text-danger">{error}</p>}
               <Form className="inputBox-width" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
-                  <Form.Control type="text" placeholder="Enter Your Name" name="name" value={formData.name} onChange={handleChange} required />
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Your Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Control type="email" placeholder="Enter email" name="email" value={formData.email} onChange={handleChange} required />
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Control type="text" placeholder="Enter Phone Number" name="phone" value={formData.phone} onChange={handleChange} required />
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Phone Number"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Control type="password" placeholder="Password" name="password" value={formData.password} onChange={handleChange} required />
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                  />
                 </Form.Group>
-                <Button variant="warning" type="submit" className="py-2 px-4 fs-6 inputBox-width">Submit</Button>
+                <Button variant="warning" type="submit" className="py-2 px-4 fs-6 inputBox-width" disabled={loading}>
+                  {loading ? <Spinner animation="border" size="sm" /> : "Submit"}
+                </Button>
               </Form>
             </div>
           </Card>
           <p className="fs-6">By signing up, you agree to our Terms of Service and Privacy Policy.</p>
         </Col>
         <Col xs={12} sm={12} md={3} lg={3} className="d-flex justify-content-end m-0 p-0">
-          <img src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1740756875/Food%20Order%20Website/hn0jwlxetvu0rf2tskkt.png" className="loginImage" alt="Signup Illustration" />
+          <img
+            src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1740756875/Food%20Order%20Website/hn0jwlxetvu0rf2tskkt.png"
+            className="loginImage"
+            alt="Signup Illustration"
+          />
         </Col>
       </Row>
       <Modal show={showSuccess} onHide={() => setShowSuccess(false)} centered>
