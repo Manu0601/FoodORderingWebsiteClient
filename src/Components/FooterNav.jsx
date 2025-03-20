@@ -24,12 +24,12 @@ function FooterNav(){
         <Col xs={12} sm={12} md={6} lg={4} >
         <div className="d-flex flex-column flex-nowrap">
             <p className="fs-5 fw-bold my-1">Pages</p>
-         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="#">About Us</a></p>
-         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="#">News</a></p>
-         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="#">Contact</a></p>
-         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="#">Blog</a></p>
-         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="#">Terms & Condition</a></p>
-         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="#">Privacy Policy</a></p>
+         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="/about">About Us</a></p>
+         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="/">News</a></p>
+         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="/">Contact</a></p>
+         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="/">Blog</a></p>
+         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="/">Terms & Condition</a></p>
+         <p className="m-0 p-0"><a  className="text-decoration-none text-reset" href="/">Privacy Policy</a></p>
         </div>
         </Col>
         <Col xs={12} sm={12} md={6} lg={4}>
@@ -64,8 +64,8 @@ function FooterNav(){
         </div>
         <div className="d-flex flex-row gap-4">
     <p className="fs-5 fw-bold">Download App On</p>
-    <a href="#"><img src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1740756873/Food%20Order%20Website/u73vggn7vjp072jznxgw.png" className="socialMedia-img"/></a>
-    <a href="#"><img src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1740756873/Food%20Order%20Website/aw2fe2fhcfsamnsxbkn3.png" className="socialMedia-img"/></a>
+    <a href="/"><img src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1740756873/Food%20Order%20Website/u73vggn7vjp072jznxgw.png" className="socialMedia-img"/></a>
+    <a href="/"><img src="https://res.cloudinary.com/dzmymp0yf/image/upload/v1740756873/Food%20Order%20Website/aw2fe2fhcfsamnsxbkn3.png" className="socialMedia-img"/></a>
     </div>
     </div>
     </Container>

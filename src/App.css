@@ -120,10 +120,156 @@
   .bestseller-image:active {
     transform: scale(1.2);
   }
+
+.restaurant-card-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .restaurant-card-container:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+  }
+  
+  
+  .restaurant-card-image-container {
+    overflow: hidden;
+    border-radius: 16px; 
+  }
+  
+  
+  .restaurant-card-image {
+    transition: transform 0.3s ease;
+  }
+  
+  .restaurant-card-container:hover .restaurant-card-image {
+    transform: scale(1.1); 
+  }
+  
+  
+  .restaurant-rating-icon {
+    width: 20px; 
+    height: 20px; 
+  }
   
 
-@media (max-width: 768px) {
-  .carousel-item {
-    padding: 10px;
+  .restaurant-card-title {
+    font-size: 1.25rem; 
   }
+
+/*Restaurant Page card*/
+
+.zoom-container {
+    transition: transform 0.3s ease; 
+  }
+  
+  .zoom-container:hover .zoom-content {
+    transform: scale(1.05); 
+    cursor: pointer; 
+  }
+
+  .zoom-container:hover .zoom-content {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+.position-relative {
+    position: relative;
+  }
+  
+  canvas {
+    z-index: 1;
+  }
+  
+  button {
+    z-index: 2;
+    position: relative;
+  }
+
+/* fire button */
+
+  :root {
+    /* the only thing needed is a grainy/noisy background image */
+    --glitter: url("https://assets.codepen.io/13471/silver-glitter-background.png");
 }
+
+.fire {
+    width: 170px;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.fire::before,
+.fire::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fire::before {
+    content: "";
+    background-image: var(--glitter), var(--glitter),
+        linear-gradient(
+            0deg,
+            rgb(251, 86, 86) 0px,
+            #ff0000 5px,
+            #ff0505 50%,
+            transparent 70%
+        ),
+        radial-gradient(ellipse at bottom, transparent 30%, black 60%);
+    background-size: 350px 500px, 400px 650px, 100% 100%, 100% 100%;
+    background-blend-mode: hard-light, color-dodge, multiply;
+    background-position: 0px 0px, 0px 0px, var(--gradientPos);
+    background-repeat: repeat, repeat, repeat, no-repeat;
+    mix-blend-mode: color-dodge;
+    filter: brightness(2.7) blur(7px) contrast(6);
+    animation: fire 1.75s linear infinite;
+    box-shadow: inset 0 -40px 50px -60px #63bbc5;
+}
+
+@keyframes fire {
+    0% {
+        background-position: center 0px, center 0px, 50% 100%, center center;
+    }
+    100% {
+        background-position: center -500px, center -650px, 50% 100%, center center;
+    }
+}
+
+/* Apply effect on hover */
+.fire:hover::before,
+.fire:hover::after {
+    opacity: 1;
+}
+
+/* Apply effect on click */
+.fire:active::before,
+.fire:active::after {
+    opacity: 1;
+}
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-weight: 200;
+    opacity: 0.5;
+    text-align: center;
+    margin: 0;
+}
+
+/*next css  */
+
+@media (max-width: 768px) {
+    .carousel-item {
+      padding: 10px;
+    }
+}
+
+
+  

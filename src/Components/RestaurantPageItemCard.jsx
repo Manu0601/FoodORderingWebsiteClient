@@ -4,8 +4,8 @@ import "../App.css";
 
 function RestaurantPageItemCard(props) {
   return (
-    <Container>
-      <Row className="shadow-lg p-3 mb-5 bg-body-tertiary rounded-5">
+    <Container className="zoom-container">
+      <Row className="shadow-lg p-3 mb-5 bg-body-tertiary rounded-5 zoom-content">
         <Col
           xs={12}
           sm={12}
@@ -13,14 +13,14 @@ function RestaurantPageItemCard(props) {
           lg={3}
           className="d-flex justify-content-center align-items-center"
         >
-          <img src={props.image} className="menuItemimage rounded-4" />
+          <img src={props.image} className="menuItemimage rounded-4 img-fluid" alt={props.heading} />
         </Col>
         <Col
           xs={12}
           sm={12}
           md={3}
           lg={3}
-          className="d-flex justify-content-center align-items-center"
+          className="d-flex justify-content-center align-items-center text-center text-sm-start"
         >
           <p className="fs-6 fw-bold">{props.heading}</p>
         </Col>
@@ -29,7 +29,7 @@ function RestaurantPageItemCard(props) {
           sm={12}
           md={3}
           lg={3}
-          className="d-flex justify-content-center align-items-center"
+          className="d-flex justify-content-center align-items-center text-center text-sm-start"
         >
           <p>{props.desc}</p>
         </Col>
@@ -49,8 +49,7 @@ function RestaurantPageItemCard(props) {
           lg={2}
           className="d-flex justify-content-center align-items-center"
         >
-          {" "}
-          <Button variant="warning" className="px-4">
+          <Button variant="warning fire" className="px-4" id="app">
             Add To Cart
           </Button>
         </Col>
