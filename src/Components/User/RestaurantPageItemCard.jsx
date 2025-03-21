@@ -20,10 +20,7 @@ function RestaurantPageItemCard(props) {
     setLoading(true);
   
     try {
-      console.log("Sending request with data:", cart); 
       const response = await axiosInstance.post("/cart/item", cart);
-      console.log("Response:", response.data);
-  
       if (response.status === 200) {
         setShowSuccess(true);
         setTimeout(() => setShowSuccess(false), 3000);
