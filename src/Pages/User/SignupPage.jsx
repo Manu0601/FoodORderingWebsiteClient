@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Form, Modal, Spinner } from "react-bootstrap";
-import "../App.css";
-import axiosInstance from "../Axios/axiosInstance";
+import "../../App.css";
+import axiosInstance from "../../Axios/axiosInstance";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({

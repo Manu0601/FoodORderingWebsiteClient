@@ -1,30 +1,14 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import RestaurantPageItemCard from "../../Components/RestaurantPageItemCard.jsx";
+import RestaurantPageItemCard from "../../Components/User/RestaurantPageItemCard.jsx";
 import "../../App.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams }from "react-router-dom";
+import useFetch from "../../Hooks/UseFetch.jsx";
 
 function RestaurantPage() {
   let { id } = useParams();
-  const [restaurant, setRestaurant] = useState(null);
-  axios
-    .get(
-      `https://foodorderingwebsiteserver.onrender.com/api/restaurant/id/${id}`,
-      {
-        withCredentials: true,
-      }
-    )
-    .then((response) => {
-      if (response.data.findRestaurant) {
-        setRestaurant(response.data.findRestaurant);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching restaurant data:", error);
-    });
-
-  if (!restaurant) return <p>Loading...</p>;
+  const [datarest, isLoading, error] = useFetch(`/restaurant/id/${id}`);
+  const restaurant = datarest?.findRestaurant || [];
 
   return (
     <Container fluid>
@@ -73,6 +57,8 @@ function RestaurantPage() {
                 desc={item.description}
                 price={item.price}
                 heading={item.name}
+                foodId={item._id}
+                restaurantId={restaurant._id}
               />
             ))
           ) : (

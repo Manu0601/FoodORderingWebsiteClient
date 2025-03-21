@@ -4,14 +4,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root.jsx";
 import Homepage from "./Pages/User/Homepage.jsx";
 import RestaurantPage from "./Pages/User/RestaurantPage.jsx";
-import AllOrderPage from "./Pages/User/AllORderPage.jsx";
 import ProfilePage from "./Pages/User/ProfilePage.jsx";
-import LoginPage from "./Pages/LoginPage.jsx";
-import SignUpPage from "./Pages/SignupPage.jsx";
 import AdminLoginPage from "./Pages/AdminLoginPage.jsx";
 import AdminDashboard from "./Pages/AdminDashboard.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
 import AboutUs from "./Pages/User/AboutUsPage.jsx";
+import LoginPage from "./Pages/User/LoginPage.jsx";
+import SignUpPage from "./Pages/User/SignupPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,20 +29,12 @@ const router = createBrowserRouter([
             element: <RestaurantPage />,
           },
           {
-            path: "/order",
-            element: <AllOrderPage />,
-          },
-          {
             path: "/about",
             element: <AboutUs />,
           },
           {
             path: "/profile",
             element: <ProfilePage />,
-          },
-          {
-            path: "/profile",
-            element: <AllOrderPage />,
           },
         ],
       },

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Form, Modal } from "react-bootstrap";
 import Cookies from "js-cookie";
-import "../App.css";
-import axiosInstance from "../Axios/axiosInstance.js";
+import "../../App.css";
+import axiosInstance from "../../Axios/axiosInstance.js";
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -79,7 +79,7 @@ function LoginPage() {
       </Row>
       <Modal show={showSuccess} onHide={() => setShowSuccess(false)} centered>
         <Modal.Body className="text-center">
-          <p className="fs-5 fw-bold text-warning">Logged in successfully ! 🥳</p>
+          <p className="fs-5 fw-bold text-warning">Logged in successfully !</p>
         </Modal.Body>
       </Modal>
     </Container>

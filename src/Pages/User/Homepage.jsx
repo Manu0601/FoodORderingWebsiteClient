@@ -1,7 +1,7 @@
 import React from "react";
-import HomepageCarousel from "../../Components/HomepageCarousel.jsx";
-import BestSellerSlider from "../../Components/BestSellerSlider.jsx";
-import RestaurantCard from "../../Components/RestaurantCard.jsx";
+import HomepageCarousel from "../../Components/User/HomepageCarousel.jsx";
+import BestSellerSlider from "../../Components/User/BestSellerSlider.jsx";
+import RestaurantCard from "../../Components/User/RestaurantCard.jsx";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import "../../App.css";
 import useFetch from "../../Hooks/UseFetch.jsx";
