@@ -61,7 +61,7 @@ function LoginPage() {
                 <Button variant="warning" type="submit" className="py-2 px-4 fs-6 inputBox-width">Submit</Button>
               </Form>
               <div className="d-flex justify-content-end">
-                <a href="#" className="text-decoration-none">
+                <a href="/signup" className="text-decoration-none">
                   <p className="my-3">Sign Up</p>
                 </a>
               </div>
