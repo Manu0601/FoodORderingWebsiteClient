@@ -12,6 +12,7 @@ import AboutUs from "./Pages/User/AboutUsPage.jsx";
 import LoginPage from "./Pages/User/LoginPage.jsx";
 import SignUpPage from "./Pages/User/SignupPage.jsx";
 import UserAddressEdit from "./Pages/User/UserAddressEdit.jsx"
+import CheckoutPage from "./Pages/User/CheckoutPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
           {
             path: "/address/new",
             element: <UserAddressEdit/>,
+          },
+          {
+            path: "/checkoutpage",
+            element: <CheckoutPage/>,
           },
         ],
       },

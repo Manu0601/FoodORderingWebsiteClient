@@ -1,3 +1,28 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  min-width: 400px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-content {
+  flex: 1;  
+}
+
+.footer-container {
+  width: 100%;
+}
+
+.restaurant-card-rating{
+width: 35px;
+height: 35px;
+}
+
 .thumbnail-image {
     width: 25px;
     height: 100%;
@@ -184,84 +209,7 @@
     position: relative;
   }
 
-/* fire button */
 
-  :root {
-    /* the only thing needed is a grainy/noisy background image */
-    --glitter: url("https://assets.codepen.io/13471/silver-glitter-background.png");
-}
-
-.fire {
-    width: 170px;
-    height: auto;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-}
-
-.fire::before,
-.fire::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.fire::before {
-    content: "";
-    background-image: var(--glitter), var(--glitter),
-        linear-gradient(
-            0deg,
-            rgb(251, 86, 86) 0px,
-            #ff0000 5px,
-            #ff0505 50%,
-            transparent 70%
-        ),
-        radial-gradient(ellipse at bottom, transparent 30%, black 60%);
-    background-size: 350px 500px, 400px 650px, 100% 100%, 100% 100%;
-    background-blend-mode: hard-light, color-dodge, multiply;
-    background-position: 0px 0px, 0px 0px, var(--gradientPos);
-    background-repeat: repeat, repeat, repeat, no-repeat;
-    mix-blend-mode: color-dodge;
-    filter: brightness(2.7) blur(7px) contrast(6);
-    animation: fire 1.75s linear infinite;
-    box-shadow: inset 0 -40px 50px -60px #63bbc5;
-}
-
-@keyframes fire {
-    0% {
-        background-position: center 0px, center 0px, 50% 100%, center center;
-    }
-    100% {
-        background-position: center -500px, center -650px, 50% 100%, center center;
-    }
-}
-
-/* Apply effect on hover */
-.fire:hover::before,
-.fire:hover::after {
-    opacity: 1;
-}
-
-/* Apply effect on click */
-.fire:active::before,
-.fire:active::after {
-    opacity: 1;
-}
-
-
-h1 {
-    text-align: center;
-    margin-bottom: 0;
-}
-
-h2 {
-    font-weight: 200;
-    opacity: 0.5;
-    text-align: center;
-    margin: 0;
-}
 /*Popup*/
 
 /* App.css */
@@ -275,7 +223,7 @@ h2 {
   border-radius: 4px;
   z-index: 1000;
   width: 300px;
-  height: 50px;
+  height: auto;
   animation: slideIn 0.5s ease-out;
 }
 
@@ -302,6 +250,18 @@ h2 {
     transform: translateX(0);
   }
 }
+/*Checkout Page*/
+.checkoutCartImage {
+  width: 50px;
+  height: 50px;
+}
+.cartbutton-checkout{
+  width: 60px;
+  height: auto;
+}
+
+/*Checkout Address*/
+
 
 /*next css  */
 

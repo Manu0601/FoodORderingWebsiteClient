@@ -5,10 +5,14 @@ import { Outlet } from "react-router-dom";
 
 function root(){
     return(
-        <>
+        <> 
+        <div id="root">
         <HeaderNav/>
-        <Outlet/>
-        <FooterNav/>
+      <div className="page-content">
+      <Outlet/>
+      </div>
+      <FooterNav />
+    </div>
         </>
     )
 }

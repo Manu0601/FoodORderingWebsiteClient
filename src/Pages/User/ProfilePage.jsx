@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import "../../App.css";
-import useFetch from "../../Hooks/UseFetch.jsx";
+import useFetch from "../../Hooks/UseFetch.jsx"
 
 function ProfilePage() {
   const [userData, isUserLoading, userError] = useFetch("/user/profile");

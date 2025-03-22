@@ -31,7 +31,7 @@ function RestaurantPageItemCard(props) {
         console.error("Response data:", error.response.data); 
         console.error("Response status:", error.response.status); 
       }
-      setError("Failed to add item to cart. Please try again.");
+      setError("Failed to add item to cart please check if any Item from different restaurant is already added to cart. Please try again.");
     } finally {
       setLoading(false);
     }
